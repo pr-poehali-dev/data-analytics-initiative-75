@@ -34,9 +34,9 @@ export function Header() {
       <nav className="container mx-auto px-6 flex items-center justify-between md:px-[24]">
         <a href="/" className="flex items-center gap-3 group" onClick={scrollToTop}>
           <img
-            src="https://cdn.poehali.dev/projects/af9ebfcc-441a-4723-a986-fd69244095d4/files/88a3730b-fb2b-4767-a869-ffdf7bc59923.jpg"
+            src="https://cdn.poehali.dev/projects/af9ebfcc-441a-4723-a986-fd69244095d4/files/3ef4f124-2f26-4675-bf97-08a1fc52261d.jpg"
             alt="Путь Будущего"
-            className="w-9 h-9 object-contain rounded-sm bg-white p-1"
+            className="w-10 h-10 object-contain rounded-sm"
           />
           <span className="text-white text-base font-medium tracking-wide">Путь Будущего</span>
         </a>
