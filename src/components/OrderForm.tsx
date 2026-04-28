@@ -12,18 +12,35 @@ export function OrderForm() {
   })
   const [submitting, setSubmitting] = useState(false)
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setSubmitting(true)
 
-    setTimeout(() => {
+    try {
+      const response = await fetch("https://functions.poehali.dev/eacaf95b-df85-4b56-ab80-ff583aa36007", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      })
+
+      if (!response.ok) {
+        throw new Error("Ошибка отправки")
+      }
+
       toast({
         title: "Заявка отправлена",
         description: "Мы свяжемся с вами в ближайшее время.",
       })
       setFormData({ name: "", phone: "", email: "", objectType: "", message: "" })
+    } catch (error) {
+      toast({
+        title: "Не удалось отправить заявку",
+        description: "Попробуйте позже или позвоните нам напрямую.",
+        variant: "destructive",
+      })
+    } finally {
       setSubmitting(false)
-    }, 600)
+    }
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
