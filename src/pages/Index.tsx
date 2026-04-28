@@ -5,6 +5,7 @@ import { Projects } from "../components/Projects"
 import { Expertise } from "../components/Expertise"
 import { FAQ } from "../components/FAQ"
 import { CallToAction } from "../components/CallToAction"
+import { OrderForm } from "../components/OrderForm"
 import { Footer } from "../components/Footer"
 
 export default function Index() {
@@ -17,6 +18,7 @@ export default function Index() {
       <Expertise />
       <FAQ />
       <CallToAction />
+      <OrderForm />
       <Footer />
     </main>
   )
