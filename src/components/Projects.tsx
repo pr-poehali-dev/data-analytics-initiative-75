@@ -8,7 +8,7 @@ const projects = [
     category: "Многоквартирный жилой дом",
     location: "Москва",
     year: "2024",
-    image: "/images/hously-1.png",
+    image: "https://cdn.poehali.dev/projects/af9ebfcc-441a-4723-a986-fd69244095d4/files/4be9bbf4-c164-4b25-ad4a-2f14c394c38b.jpg",
   },
   {
     id: 2,
@@ -16,7 +16,7 @@ const projects = [
     category: "Коммерческий объект",
     location: "Санкт-Петербург",
     year: "2023",
-    image: "/images/hously-2.png",
+    image: "https://cdn.poehali.dev/projects/af9ebfcc-441a-4723-a986-fd69244095d4/files/2cb455fd-1d3a-491d-96cd-71a6caf597eb.jpg",
   },
   {
     id: 3,
@@ -24,7 +24,7 @@ const projects = [
     category: "Жилой комплекс",
     location: "Московская область",
     year: "2023",
-    image: "/images/hously-3.png",
+    image: "https://cdn.poehali.dev/projects/af9ebfcc-441a-4723-a986-fd69244095d4/files/cf95aee6-7a88-4f0a-a725-584111e30441.jpg",
   },
   {
     id: 4,
@@ -32,7 +32,7 @@ const projects = [
     category: "Промышленный объект",
     location: "Екатеринбург",
     year: "2024",
-    image: "/images/hously-4.png",
+    image: "https://cdn.poehali.dev/projects/af9ebfcc-441a-4723-a986-fd69244095d4/files/30f96bf3-801b-4a5d-9395-e97e8c3cf1b9.jpg",
   },
 ]
 
