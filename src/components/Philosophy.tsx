@@ -54,7 +54,7 @@ export function Philosophy() {
           {/* Left column - Title and image */}
           <div className="lg:sticky lg:top-32 lg:self-start">
             <p className="text-muted-foreground text-sm tracking-[0.3em] uppercase mb-6">Наш подход</p>
-            <h2 className="text-6xl md:text-6xl font-medium leading-[1.15] tracking-tight mb-6 text-balance lg:text-8xl">
+            <h2 className="text-4xl md:text-5xl font-medium leading-[1.15] tracking-tight mb-6 text-balance lg:text-6xl">
               Проектирование
               <br />
               <HighlightedText>с ответственностью</HighlightedText>
