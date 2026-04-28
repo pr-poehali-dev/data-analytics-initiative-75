@@ -5,8 +5,13 @@ export function Footer() {
         <div className="grid md:grid-cols-4 gap-12 mb-16">
           {/* Brand */}
           <div className="md:col-span-2">
-            <a href="/" className="inline-block mb-6">
-              <img src="/images/hously-logo.svg" alt="Пространство" width={120} height={32} className="w-auto h-6" />
+            <a href="/" className="inline-flex items-center gap-3 mb-6">
+              <img
+                src="https://cdn.poehali.dev/projects/af9ebfcc-441a-4723-a986-fd69244095d4/files/88a3730b-fb2b-4767-a869-ffdf7bc59923.jpg"
+                alt="Путь Будущего"
+                className="w-10 h-10 object-contain rounded-sm bg-white p-1"
+              />
+              <span className="text-foreground text-base font-medium tracking-wide">Путь Будущего</span>
             </a>
             <p className="text-muted-foreground leading-relaxed max-w-sm">
               Проектная организация «Путь Будущего» — разработка документации всех разделов по постановлению №87.
