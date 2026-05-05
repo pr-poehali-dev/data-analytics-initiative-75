@@ -136,11 +136,19 @@ def handler(event: dict, context) -> dict:
         with smtplib.SMTP_SSL('smtp.yandex.ru', 465, timeout=15) as server:
             server.login(sender_email, smtp_password)
             server.sendmail(sender_email, [recipient_email], msg.as_string())
-    except Exception as e:
+    except smtplib.SMTPAuthenticationError as e:
+        print(f'SMTP AUTH ERROR: {e.smtp_code} {e.smtp_error}')
         return {
             'statusCode': 500,
             'headers': {'Access-Control-Allow-Origin': '*'},
-            'body': json.dumps({'error': f'Mail sending failed: {str(e)}'})
+            'body': json.dumps({'error': 'SMTP authentication failed', 'details': str(e.smtp_error)})
+        }
+    except Exception as e:
+        print(f'SMTP ERROR: {type(e).__name__}: {str(e)}')
+        return {
+            'statusCode': 500,
+            'headers': {'Access-Control-Allow-Origin': '*'},
+            'body': json.dumps({'error': f'Mail sending failed: {type(e).__name__}: {str(e)}'})
         }
 
     tg_text = (
