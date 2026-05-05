@@ -7,14 +7,19 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
 
-def send_max_notification(text: str) -> None:
-    token = os.environ.get('MAX_BOT_TOKEN', '')
-    chat_id = os.environ.get('MAX_CHAT_ID', '')
+def send_telegram_notification(text: str) -> None:
+    token = os.environ.get('TELEGRAM_BOT_TOKEN', '')
+    chat_id = os.environ.get('TELEGRAM_CHAT_ID', '')
     if not token or not chat_id:
         return
     try:
-        url = f'https://botapi.max.ru/messages?access_token={urllib.parse.quote(token)}&chat_id={urllib.parse.quote(chat_id)}'
-        payload = json.dumps({'text': text}).encode('utf-8')
+        url = f'https://api.telegram.org/bot{token}/sendMessage'
+        payload = json.dumps({
+            'chat_id': chat_id,
+            'text': text,
+            'parse_mode': 'HTML',
+            'disable_web_page_preview': True
+        }).encode('utf-8')
         req = urllib.request.Request(
             url,
             data=payload,
@@ -138,15 +143,15 @@ def handler(event: dict, context) -> dict:
             'body': json.dumps({'error': f'Mail sending failed: {str(e)}'})
         }
 
-    max_text = (
-        f'🔔 Новая заявка с сайта\n\n'
-        f'👤 Имя: {name}\n'
-        f'📞 Телефон: {phone}\n'
-        f'✉️ Email: {email or "не указан"}\n'
-        f'🏗 Тип объекта: {object_type_label}\n\n'
-        f'📝 Описание:\n{message or "не указано"}'
+    tg_text = (
+        f'🔔 <b>Новая заявка с сайта</b>\n\n'
+        f'👤 <b>Имя:</b> {name}\n'
+        f'📞 <b>Телефон:</b> {phone}\n'
+        f'✉️ <b>Email:</b> {email or "не указан"}\n'
+        f'🏗 <b>Тип объекта:</b> {object_type_label}\n\n'
+        f'📝 <b>Описание:</b>\n{message or "не указано"}'
     )
-    send_max_notification(max_text)
+    send_telegram_notification(tg_text)
 
     return {
         'statusCode': 200,
