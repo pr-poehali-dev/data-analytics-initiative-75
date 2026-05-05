@@ -1,8 +1,29 @@
 import json
 import os
 import smtplib
+import urllib.request
+import urllib.parse
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+
+
+def send_max_notification(text: str) -> None:
+    token = os.environ.get('MAX_BOT_TOKEN', '')
+    chat_id = os.environ.get('MAX_CHAT_ID', '')
+    if not token or not chat_id:
+        return
+    try:
+        url = f'https://botapi.max.ru/messages?access_token={urllib.parse.quote(token)}&chat_id={urllib.parse.quote(chat_id)}'
+        payload = json.dumps({'text': text}).encode('utf-8')
+        req = urllib.request.Request(
+            url,
+            data=payload,
+            headers={'Content-Type': 'application/json'},
+            method='POST'
+        )
+        urllib.request.urlopen(req, timeout=10).read()
+    except Exception:
+        pass
 
 
 def handler(event: dict, context) -> dict:
@@ -116,6 +137,16 @@ def handler(event: dict, context) -> dict:
             'headers': {'Access-Control-Allow-Origin': '*'},
             'body': json.dumps({'error': f'Mail sending failed: {str(e)}'})
         }
+
+    max_text = (
+        f'🔔 Новая заявка с сайта\n\n'
+        f'👤 Имя: {name}\n'
+        f'📞 Телефон: {phone}\n'
+        f'✉️ Email: {email or "не указан"}\n'
+        f'🏗 Тип объекта: {object_type_label}\n\n'
+        f'📝 Описание:\n{message or "не указано"}'
+    )
+    send_max_notification(max_text)
 
     return {
         'statusCode': 200,
